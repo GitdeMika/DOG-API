@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Dog Images</title>
+    <link rel="stylesheet" href="DOG.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="dog-paw-free-png.webp" alt="Dog Paw Logo" class="logo">
+            <h1>Random Dog Images</h1>
+        </div>
+        <div class="content">
+            <button onclick="getRandomDogImage()">Get Random Dog Image</button>
+            <img id="dog-image" src="" alt="Dog Image" class="hiden">
+        </div>
+    </div>
+
+    <script>
+        
+        var imagem= document.querySelector('#dog-image')
+        function getRandomDogImage() {
+            fetch('https://api.thedogapi.com/v1/images/search', {
+                headers: {
+                    'x-api-key': 'live_gOMmWeYuBQsNlGh8enOzLoffRhncu57rAettxNOLj8FYQrKNwiOIwHqzPj6EWNqZ'
+                }
+            })
+            
+            .then(response => response.json())
+            .then(data => {
+                const imageUrl = data[0].url;
+                document.getElementById('dog-image').src = imageUrl;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            imagem.classList.remove("hiden")
+        }
+    </script>
+</body>
+</html>
